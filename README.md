@@ -7,7 +7,10 @@
 - Hysteria2用UDP端口，Socks5用TCP端口
 - 如果你只是为了保活登陆，serv00 ct8可以不安装任何东西，只需设置Github Actions保活
 - 如果安装部署过其它脚本，请你在安装此脚本之前用下面的清理服务器命令清除一次服务器后再安装！！！！！！
-
+## ⚠️ 问题反馈：天诚技术交流群
+## 👥 群组链接：https://t.me/cncomorg
+- Cloudflare优选IP 订阅器，每天定时发布更新。
+- openwrt系统 iStore系统 Ros系统 影视 音乐 机场等技术交流。
 ## 一键脚本
 - 推荐Socks5 hysteria2 nohup模式
 ```bash
@@ -43,6 +46,38 @@ rm -rf ~/*
   {"username": "4r885wvl", "password": "%Mg^dDMo6yIY$dZmxWNy", "panel": "panel.ct8.pl", "ssh": "s1.ct8.pl"}
 ]
 ```
+# cloudflare worker部署保活
+## cloudflare 部署步骤
+- 复制worker.js代码到cloudflare Workers保存
+- Workers设置变量名称，添加 ACCOUNTS_JSON TELEGRAM_JSON 值，替换自己的账号 密码 面板
+- 在设置里设置Cron 触发器，设置触发时间。
+
+## worker部署变量
+添加变量名称 ACCOUNTS_JSON 
+添加变量值，复制下面代码替换成自己的账号 密码 面板
+
+```json
+[  
+  { "username": "serv00user1", "password": "serv00password1", "panelnum": "0", "type": "serv00" },
+  { "username": "serv00user2", "password": "serv00password2", "panelnum": "4", "type": "serv00" },
+  { "username": "serv00user3", "password": "serv00password3", "panelnum": "7", "type": "serv00" },
+  { "username": "ct8user1", "password": "ct8password1", "type": "ct8" },
+  { "username": "ct8user2", "password": "ct8password2", "type": "ct8" }
+]
+```
+
+添加变量名称 TELEGRAM_JSON 
+添加变量值，复制下面代码替换成自己的TG TOKEN ID
+
+```json
+{
+  "telegramBotToken": "YOUR_BOT_TOKEN",
+  "telegramBotUserId": "YOUR_USER_ID"
+}
+```
+
+
+
 
 # 致谢
 [RealNeoMan](https://github.com/Neomanbeta/ct8socks)、[k0baya](https://github.com/k0baya)、[eooce](https://github.com/eooce)、[cmliu](https://github.com/cmliu)

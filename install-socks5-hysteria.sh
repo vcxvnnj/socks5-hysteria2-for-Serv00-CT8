@@ -15,7 +15,8 @@
     echo "    _(__  ) / /_/ // /__  _  ,<   _(__  )  ____/ /        不要直连"
     echo "    /____/  \\____/ \\___/  /_/|_|  /____/  /_____/         没有售后"
     echo "缝合怪：天诚 原作者们：cmliu RealNeoMan、k0baya、eooce"
-    echo "交流群:https://t.me/cncomorg"
+    echo "Cloudflare优选IP 订阅器，每天定时发布更新。"
+    echo "欢迎加入交流群:https://t.me/cncomorg"
     echo -e "\e[0m"  
 }
 
@@ -36,7 +37,7 @@ HYSTERIA_WORKDIR="$USER_HOME/.hysteria"
 
 # 随机生成密码函数
 generate_password() {
-  export PASSWORD=${PASSWORD:-$(openssl rand -base64 12)}
+  export PASSWORD=${PASSWORD:-$(uuidgen)}
 }
 
 # 设置服务器端口函数
@@ -351,14 +352,11 @@ install_nezha_agent(){
 
 # 添加 crontab 守护进程任务
 add_crontab_task() {
-  crontab -l > /tmp/crontab.bak
-  echo "*/1 * * * * if ! pgrep -f nezha-agent; then nohup $WORKDIR/start.sh >/dev/null 2>&1 & fi" >> /tmp/crontab.bak
-  echo "*/1 * * * * if ! pgrep -x s5; then nohup ${FILE_PATH}/s5 -c ${FILE_PATH}/config.json >/dev/null 2>&1 & fi" >> /tmp/crontab.bak
-  echo "*/1 * * * * if ! pgrep -x web; then nohup $HYSTERIA_WORKDIR/web server $HYSTERIA_WORKDIR/config.yaml >/dev/null 2>&1 & fi" >> /tmp/crontab.bak
-  crontab /tmp/crontab.bak
-  rm /tmp/crontab.bak
+  echo -e "\e[1;33m正在添加 crontab 任务...\033[0m"
+  curl -s https://raw.githubusercontent.com/gshtwy/socks5-hysteria2-for-Serv00-CT8/main/crtest.sh | bash
   echo -e "\e[1;32mCrontab 任务添加完成\e[0m"
 }
+
 
 # 主程序
 read -p "是否安装 Hysteria？(Y/N 回车N)" install_hysteria_answer
